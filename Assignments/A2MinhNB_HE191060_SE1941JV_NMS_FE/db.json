@@ -1,0 +1,109 @@
+{
+  "accounts": [
+    {
+      "id": "1",
+      "accountName": "Admin",
+      "accountEmail": "admin@funews.edu.vn",
+      "accountRole": 1,
+      "accountPassword": "Admin"
+    },
+    {
+      "id": "2",
+      "accountName": "Staff01",
+      "accountEmail": "staff01@funews.edu.vn",
+      "accountRole": 2,
+      "accountPassword": "123456"
+    },
+    {
+      "id": "3",
+      "accountName": "Staff02",
+      "accountEmail": "staff02@funews.edu.vn",
+      "accountRole": 2,
+      "accountPassword": "123456"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "categoryName": "Technology",
+      "categoryDescription": "Technology related news",
+      "parentCategoryID": null,
+      "isActive": 1
+    },
+    {
+      "id": "2",
+      "categoryName": "Education",
+      "categoryDescription": "Education and learning",
+      "parentCategoryID": null,
+      "isActive": 1
+    },
+    {
+      "id": "3",
+      "categoryName": "Events",
+      "categoryDescription": "University events",
+      "parentCategoryID": null,
+      "isActive": 1
+    },
+    {
+      "id": "4",
+      "categoryName": "Announcements",
+      "categoryDescription": "Official announcements",
+      "parentCategoryID": null,
+      "isActive": 0
+    }
+  ],
+  "news": [
+    {
+      "id": "1",
+      "newsTitle": "ReactJS Workshop 2026",
+      "headline": "Learn modern React with hands-on practice",
+      "createdDate": "2026-01-10",
+      "newsContent": "This workshop introduces ReactJS fundamentals and hooks.",
+      "newsSource": "FUNews",
+      "categoryID": 2,
+      "newsStatus": 1,
+      "createdByID": 2,
+      "updatedByID": null,
+      "modifiedDate": null,
+      "tags": [
+        "React",
+        "Workshop",
+        "Frontend"
+      ]
+    },
+    {
+      "id": "2",
+      "newsTitle": "University Sports Day",
+      "headline": "Annual sports event for students",
+      "createdDate": "2026-01-15",
+      "newsContent": "Students participated in various sports activities.",
+      "newsSource": "FUNews",
+      "categoryID": 3,
+      "newsStatus": 1,
+      "createdByID": 3,
+      "updatedByID": null,
+      "modifiedDate": null,
+      "tags": [
+        "Sports",
+        "Event"
+      ]
+    },
+    {
+      "id": "3",
+      "newsTitle": "System Maintenance Notice",
+      "headline": "Scheduled system downtime",
+      "createdDate": "2026-01-18",
+      "newsContent": "The system will be under maintenance this weekend.",
+      "newsSource": "Admin",
+      "categoryID": 4,
+      "newsStatus": 0,
+      "createdByID": 1,
+      "updatedByID": 1,
+      "modifiedDate": "2026-01-19",
+      "tags": [
+        "Maintenance",
+        "Announcement"
+      ]
+    }
+  ]
+}

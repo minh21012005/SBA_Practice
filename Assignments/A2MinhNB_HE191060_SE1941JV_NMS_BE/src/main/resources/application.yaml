@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: SE1941JV
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=FUNewsDB;encrypt=true;trustServerCertificate=true;
+    username: sa
+    password: 21012005
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.SQLServerDialect
+    open-in-view: false
+
+# JWT (change in production)
+app:
+  jwt:
+    secret: qoAEABDke07+AVLepXB4aCMtsT0wMAqR5x2VFyldsnx6e75YQkJH2UcZKTjEyoNgG71SBCXfq5N6NVZxWOfsHQ==
+    expiration-ms: 86400000
