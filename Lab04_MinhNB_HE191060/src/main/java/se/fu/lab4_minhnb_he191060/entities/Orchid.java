@@ -1,4 +1,4 @@
-package se.fu.lab4_minhnb_he191060.pojos;
+package se.fu.lab4_minhnb_he191060.entities;
 
 import jakarta.persistence.*;
 

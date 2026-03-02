@@ -2,7 +2,7 @@ package se.fu.lab4_minhnb_he191060.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.fu.lab4_minhnb_he191060.pojos.Orchid;
+import se.fu.lab4_minhnb_he191060.entities.Orchid;
 import se.fu.lab4_minhnb_he191060.repositories.IOrchidRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package se.fu.lab4_minhnb_he191060.services;
 
-import se.fu.lab4_minhnb_he191060.pojos.Orchid;
+import se.fu.lab4_minhnb_he191060.entities.Orchid;
 
 import java.util.List;
 import java.util.Optional;
