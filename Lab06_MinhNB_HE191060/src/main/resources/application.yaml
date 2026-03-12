@@ -1,0 +1,28 @@
+server:
+  port: 8005
+spring:
+  application:
+    name: lab6_minhnb_he191060
+  web:
+    cors:
+      allowed-origins: http://localhost:5173
+      allowed-methods: GET, POST, PUT, DELETE, OPTIONS
+      allowed-headers: Content-Type, Authorization
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=OrchidJWT;encrypt=true;trustServerCertificate=true;
+    username: sa
+    password: 123456789
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.SQLServerDialect
+    open-in-view: false
+security:
+  jwt:
+    secret-key: 7b2fe22b33619d02ff7e7c8b1429dd348b230f9922ef41d6c162fa8cfe30e84e
+    expiration-time: 3600000
