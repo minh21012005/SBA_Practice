@@ -10,7 +10,7 @@ spring:
       allowed-headers: Content-Type, Authorization
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=OrchidJWT;encrypt=true;trustServerCertificate=true;
-    username: sa
+    username: test
     password: 123456789
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
