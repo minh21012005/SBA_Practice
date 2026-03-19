@@ -16,14 +16,14 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewsArticleResponse {
-    private Long newsArticleId;
+    private Integer newsArticleId;
     private String newsTitle;
     private String headline;
     private String newsContent;
     private String newsSource;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-    private Integer newsStatus;
+    private Boolean newsStatus;
     private CategoryResponse category;
     private AccountResponse createdBy;
     private Set<TagResponse> tags;

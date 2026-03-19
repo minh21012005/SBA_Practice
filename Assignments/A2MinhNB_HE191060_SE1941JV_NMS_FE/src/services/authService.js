@@ -16,3 +16,12 @@ export const me = async () => {
   const res = await axiosClient.get("/auth/me");
   return { ...res, data: mapId(res.data) };
 };
+
+export const register = async (name, email, password) => {
+  const res = await axiosClient.post("/auth/register", {
+    accountName: name,
+    accountEmail: email,
+    accountPassword: password,
+  });
+  return { ...res, data: mapId(res.data) };
+};

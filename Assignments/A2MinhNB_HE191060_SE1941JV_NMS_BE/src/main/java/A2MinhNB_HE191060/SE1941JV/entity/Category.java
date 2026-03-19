@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 import java.util.List;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "Category")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,29 +18,27 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long categoryId;
+    @Column(name = "CategoryID")
+    Integer categoryId;
 
-    @Column(nullable = false)
+    @Column(name = "CategoryName", length = 100, nullable = false)
     String categoryName;
 
-    String categoryDescription;
+    @Column(name = "CategoryDesciption", length = 250, nullable = false)
+    String categoryDesciption;
+
+    @Column(name = "IsActive")
+    Boolean isActive;
 
     /**
      * Self reference: parent category
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_category_id")
+    @JoinColumn(name = "ParentCategoryID")
     Category parentCategory;
 
     @OneToMany(mappedBy = "parentCategory")
     List<Category> subCategories;
-
-    /**
-     * 1 = active
-     * 0 = inactive
-     */
-    @Column(nullable = false)
-    Integer isActive;
 
     /**
      * One category has many news articles

@@ -10,9 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountResponse {
-    private Long accountId;
+    private Integer accountId;
     private String accountName;
     private String accountEmail;
     private Integer accountRole;
-    // never expose password
 }

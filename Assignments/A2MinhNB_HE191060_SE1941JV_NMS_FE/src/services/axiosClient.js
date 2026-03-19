@@ -30,7 +30,9 @@ axiosClient.interceptors.response.use(
   (response) => response,
   (error) => {
     const status = error?.response?.status;
-    if (status === 401) {
+    const isAuthRequest = error?.config?.url?.includes("/auth/login") || error?.config?.url?.includes("/auth/me");
+
+    if (status === 401 && !isAuthRequest) {
       try {
         localStorage.removeItem("funews_token");
         localStorage.removeItem("funews_account");

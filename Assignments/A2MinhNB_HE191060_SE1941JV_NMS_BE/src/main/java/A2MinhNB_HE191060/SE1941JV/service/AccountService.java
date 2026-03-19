@@ -32,7 +32,7 @@ public class AccountService {
     }
 
     @Transactional(readOnly = true)
-    public AccountResponse getById(Long id) {
+    public AccountResponse getById(Integer id) {
         SystemAccount a = accountRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found: " + id));
         return toResponse(a);
@@ -57,7 +57,7 @@ public class AccountService {
     }
 
     @Transactional
-    public AccountResponse update(Long id, AccountRequest request) {
+    public AccountResponse update(Integer id, AccountRequest request) {
         SystemAccount account = accountRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found: " + id));
         if (!account.getAccountEmail().equals(request.getAccountEmail())
@@ -76,7 +76,7 @@ public class AccountService {
 
     /** Update own profile (name, email, password). Role is not changed. */
     @Transactional
-    public AccountResponse updateProfile(Long accountId, ProfileUpdateRequest request) {
+    public AccountResponse updateProfile(Integer accountId, ProfileUpdateRequest request) {
         SystemAccount account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found: " + accountId));
         if (!account.getAccountEmail().equals(request.getAccountEmail())
@@ -93,7 +93,7 @@ public class AccountService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void delete(Integer id) {
         SystemAccount account = accountRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found: " + id));
         long count = newsArticleRepository.countByCreatedByAccountId(id);

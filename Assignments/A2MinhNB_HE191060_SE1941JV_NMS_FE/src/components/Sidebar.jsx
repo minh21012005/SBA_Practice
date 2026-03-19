@@ -50,20 +50,21 @@ const Sidebar = () => {
             </div>
 
             <Nav className="flex-column gap-1">
-                <Nav.Link as={NavLink} to="/admin/dashboard" style={linkStyle}>
-                    <i className="bi bi-speedometer2" />
-                    Dashboard
-                </Nav.Link>
-
-                {/* Admin only: Users Management */}
+                {/* Admin only: Dashboard and Users Management */}
                 {isAdmin && (
-                    <Nav.Link as={NavLink} to="/admin/users" style={linkStyle}>
-                        <i className="bi bi-people" />
-                        Users
-                    </Nav.Link>
+                    <>
+                        <Nav.Link as={NavLink} to="/admin/dashboard" style={linkStyle}>
+                            <i className="bi bi-speedometer2" />
+                            Dashboard
+                        </Nav.Link>
+                        <Nav.Link as={NavLink} to="/admin/users" style={linkStyle}>
+                            <i className="bi bi-people" />
+                            Users
+                        </Nav.Link>
+                    </>
                 )}
 
-                {/* Staff: Categories, News, Tags, Profile, My News */}
+                {/* Staff: Categories, News, Tags, My News */}
                 {isStaff && (
                     <>
                         <Nav.Link as={NavLink} to="/admin/categories" style={linkStyle}>

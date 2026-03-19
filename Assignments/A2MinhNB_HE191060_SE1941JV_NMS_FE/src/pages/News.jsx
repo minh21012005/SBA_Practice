@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Table, Form } from "react-bootstrap";
+import { Button, Table, Form, Badge } from "react-bootstrap";
 import { createNews, deleteNews, getNews, updateNews } from "../services/newsService";
 import NewsModal from "../components/NewsModal";
 import ConfirmDialog from "../components/ConfirmDialog";
@@ -108,6 +108,7 @@ const News = () => {
                         <th>Title</th>
                         <th>Headline</th>
                         <th>Content</th>
+                        <th>Status</th>
                         <th width="160">Actions</th>
                     </tr>
                 </thead>
@@ -117,6 +118,13 @@ const News = () => {
                             <td>{n.newsTitle}</td>
                             <td>{n.headline}</td>
                             <td>{n.newsContent}</td>
+                            <td>
+                                {n.newsStatus ? (
+                                    <Badge bg="success">Active</Badge>
+                                ) : (
+                                    <Badge bg="secondary">Inactive</Badge>
+                                )}
+                            </td>
                             <td>
                                 <Button
                                     size="sm"

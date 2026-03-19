@@ -38,7 +38,7 @@ public class TagService {
     }
 
     @Transactional(readOnly = true)
-    public TagResponse getById(Long id) {
+    public TagResponse getById(Integer id) {
         Tag t = tagRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tag not found: " + id));
         return toResponse(t);
@@ -55,7 +55,7 @@ public class TagService {
     }
 
     @Transactional
-    public TagResponse update(Long id, TagRequest request) {
+    public TagResponse update(Integer id, TagRequest request) {
         Tag tag = tagRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tag not found: " + id));
         tag.setTagName(request.getTagName());
@@ -65,7 +65,7 @@ public class TagService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void delete(Integer id) {
         Tag tag = tagRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tag not found: " + id));
         tagRepository.delete(tag);
@@ -73,7 +73,7 @@ public class TagService {
 
     /** Resolve tags by IDs; creates missing tags by name if needed. Used by NewsArticleService. */
     @Transactional(readOnly = true)
-    public Set<Tag> resolveTags(Set<Long> tagIds) {
+    public Set<Tag> resolveTags(Set<Integer> tagIds) {
         if (tagIds == null || tagIds.isEmpty()) return Set.of();
         return tagIds.stream()
                 .map(id -> tagRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tag not found: " + id)))

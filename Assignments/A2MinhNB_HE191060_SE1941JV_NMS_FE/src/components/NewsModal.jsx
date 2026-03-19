@@ -8,7 +8,7 @@ const NewsModal = ({ show, onClose, onSubmit, initialData, submitting }) => {
     const [headline, setHeadline] = useState("");
     const [newsContent, setNewsContent] = useState("");
     const [newsSource, setNewsSource] = useState("");
-    const [newsStatus, setNewsStatus] = useState(1);
+    const [newsStatus, setNewsStatus] = useState(true);
     const [categoryId, setCategoryId] = useState(null);
     const [tagIds, setTagIds] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -20,7 +20,7 @@ const NewsModal = ({ show, onClose, onSubmit, initialData, submitting }) => {
             setHeadline(initialData.headline || "");
             setNewsContent(initialData.newsContent || "");
             setNewsSource(initialData.newsSource || "");
-            setNewsStatus(initialData.newsStatus ?? 1);
+            setNewsStatus(initialData.newsStatus ?? true);
             setCategoryId(initialData.category?.id ?? null);
             setTagIds((initialData.tags || []).map((t) => t.id));
         } else {
@@ -28,7 +28,7 @@ const NewsModal = ({ show, onClose, onSubmit, initialData, submitting }) => {
             setHeadline("");
             setNewsContent("");
             setNewsSource("");
-            setNewsStatus(1);
+            setNewsStatus(true);
             setCategoryId(null);
             setTagIds([]);
         }
@@ -54,7 +54,7 @@ const NewsModal = ({ show, onClose, onSubmit, initialData, submitting }) => {
             headline,
             newsContent,
             newsSource,
-            newsStatus: Number(newsStatus),
+            newsStatus: newsStatus === true || newsStatus === "true",
             categoryId: categoryId ? Number(categoryId) : null,
             tagIds: Array.from(new Set(tagIds.map((v) => Number(v))))
         };
@@ -138,9 +138,9 @@ const NewsModal = ({ show, onClose, onSubmit, initialData, submitting }) => {
 
                     <Form.Group className="mt-3">
                         <Form.Label>Status</Form.Label>
-                        <Form.Select value={newsStatus} onChange={(e) => setNewsStatus(e.target.value)}>
-                            <option value={1}>Active</option>
-                            <option value={0}>Inactive</option>
+                        <Form.Select value={String(newsStatus)} onChange={(e) => setNewsStatus(e.target.value === "true")}>
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
                         </Form.Select>
                     </Form.Group>
                 </Form>

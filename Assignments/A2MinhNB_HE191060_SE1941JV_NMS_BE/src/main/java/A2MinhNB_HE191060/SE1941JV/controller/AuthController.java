@@ -22,6 +22,11 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(request));
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<AccountResponse> register(@Valid @RequestBody A2MinhNB_HE191060.SE1941JV.dto.auth.RegisterRequest request) {
+        return ResponseEntity.status(201).body(authService.register(request));
+    }
+
     @GetMapping("/me")
     public ResponseEntity<AccountResponse> me(@AuthenticationPrincipal AccountUserDetails user) {
         if (user == null) {

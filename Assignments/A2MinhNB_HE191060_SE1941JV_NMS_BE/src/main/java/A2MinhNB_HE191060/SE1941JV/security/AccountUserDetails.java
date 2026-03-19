@@ -49,7 +49,7 @@ public class AccountUserDetails implements UserDetails {
         return true;
     }
 
-    public Long getAccountId() {
+    public Integer getAccountId() {
         return account.getAccountId();
     }
 

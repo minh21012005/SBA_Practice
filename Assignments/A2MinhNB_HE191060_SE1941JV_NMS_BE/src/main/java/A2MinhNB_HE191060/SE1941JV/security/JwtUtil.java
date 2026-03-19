@@ -20,7 +20,7 @@ public class JwtUtil {
         this.key = Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateToken(String email, Long accountId, String role) {
+    public String generateToken(String email, Integer accountId, String role) {
         return Jwts.builder()
                 .subject(email)
                 .claim("accountId", accountId)
@@ -52,8 +52,8 @@ public class JwtUtil {
         return parseToken(token).getSubject();
     }
 
-    public Long getAccountIdFromToken(String token) {
-        return parseToken(token).get("accountId", Long.class);
+    public Integer getAccountIdFromToken(String token) {
+        return parseToken(token).get("accountId", Integer.class);
     }
 
     public String getRoleFromToken(String token) {

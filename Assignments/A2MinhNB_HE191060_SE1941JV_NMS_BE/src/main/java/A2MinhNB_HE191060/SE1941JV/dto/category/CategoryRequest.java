@@ -14,13 +14,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CategoryRequest {
     @NotBlank(message = "Category name is required")
-    @Size(max = 255)
+    @Size(max = 100)
     private String categoryName;
 
-    private String categoryDescription;
+    @NotBlank(message = "Category description is required")
+    @Size(max = 250)
+    private String categoryDesciption;
 
-    private Long parentCategoryId;
+    private Integer parentCategoryId;
 
-    @NotNull(message = "Status is required (1=active, 0=inactive)")
-    private Integer isActive;
+    @NotNull(message = "Status is required")
+    private Boolean isActive;
 }

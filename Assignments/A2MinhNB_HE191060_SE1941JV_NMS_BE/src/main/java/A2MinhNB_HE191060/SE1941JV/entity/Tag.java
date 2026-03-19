@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 import java.util.Set;
 
 @Entity
-@Table(name = "tags")
+@Table(name = "Tag")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,11 +18,13 @@ public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long tagId;
+    @Column(name = "TagID")
+    Integer tagId;
 
-    @Column(nullable = false)
+    @Column(name = "TagName", length = 50)
     String tagName;
 
+    @Column(name = "Note", length = 400)
     String note;
 
     /**

@@ -4,22 +4,22 @@ import { Modal, Button, Form } from "react-bootstrap";
 const CategoryModal = ({ show, onClose, onSubmit, initialData, submitting }) => {
     const [form, setForm] = useState({
         categoryName: "",
-        categoryDescription: "",
-        isActive: 1,
+        categoryDesciption: "",
+        isActive: true,
     });
 
     useEffect(() => {
         if (initialData) {
             setForm({
                 categoryName: initialData.categoryName,
-                categoryDescription: initialData.categoryDescription,
+                categoryDesciption: initialData.categoryDesciption,
                 isActive: initialData.isActive,
             });
         } else {
             setForm({
                 categoryName: "",
-                categoryDescription: "",
-                isActive: 1,
+                categoryDesciption: "",
+                isActive: true,
             });
         }
     }, [initialData]);
@@ -28,7 +28,7 @@ const CategoryModal = ({ show, onClose, onSubmit, initialData, submitting }) => 
         const { name, value } = e.target;
         setForm({
             ...form,
-            [name]: name === "isActive" ? Number(value) : value,
+            [name]: name === "isActive" ? (value === "true" || value === true || value === 1 || value === "1") : value,
         });
     };
 
@@ -62,8 +62,8 @@ const CategoryModal = ({ show, onClose, onSubmit, initialData, submitting }) => 
                     <Form.Group className="mb-3">
                         <Form.Label>Description</Form.Label>
                         <Form.Control
-                            name="categoryDescription"
-                            value={form.categoryDescription}
+                            name="categoryDesciption"
+                            value={form.categoryDesciption}
                             onChange={handleChange}
                         />
                     </Form.Group>
@@ -72,11 +72,11 @@ const CategoryModal = ({ show, onClose, onSubmit, initialData, submitting }) => 
                         <Form.Label>Status</Form.Label>
                         <Form.Select
                             name="isActive"
-                            value={form.isActive}
+                            value={String(form.isActive)}
                             onChange={handleChange}
                         >
-                            <option value={1}>Active</option>
-                            <option value={0}>Inactive</option>
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
                         </Form.Select>
                     </Form.Group>
                 </Form>

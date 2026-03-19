@@ -15,11 +15,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewsArticleRequest {
-    @NotBlank(message = "Title is required")
-    @Size(max = 500)
+    @Size(max = 400)
     private String newsTitle;
 
-    @Size(max = 1000)
+    @NotBlank(message = "Headline is required")
+    @Size(max = 150)
     private String headline;
 
     private String newsContent;
@@ -27,12 +27,12 @@ public class NewsArticleRequest {
     @Size(max = 255)
     private String newsSource;
 
-    @NotNull(message = "News status is required (1=active, 0=inactive)")
-    private Integer newsStatus;
+    @NotNull(message = "News status is required")
+    private Boolean newsStatus;
 
     @NotNull(message = "Category is required")
-    private Long categoryId;
+    private Integer categoryId;
 
     /** Tag IDs to associate; can be empty. */
-    private Set<Long> tagIds;
+    private Set<Integer> tagIds;
 }

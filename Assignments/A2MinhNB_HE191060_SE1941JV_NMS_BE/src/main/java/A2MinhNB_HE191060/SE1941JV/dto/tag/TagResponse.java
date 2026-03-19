@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TagResponse {
-    private Long tagId;
+    private Integer tagId;
     private String tagName;
     private String note;
 }

@@ -9,26 +9,26 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface NewsArticleRepository extends JpaRepository<NewsArticle, Long> {
-    List<NewsArticle> findByNewsStatus(Integer status);
+public interface NewsArticleRepository extends JpaRepository<NewsArticle, Integer> {
+    List<NewsArticle> findByNewsStatus(Boolean status);
 
-    Page<NewsArticle> findByNewsStatus(Integer status, Pageable pageable);
+    Page<NewsArticle> findByNewsStatus(Boolean status, Pageable pageable);
 
-    Page<NewsArticle> findByCreatedByAccountId(Long accountId, Pageable pageable);
+    Page<NewsArticle> findByCreatedByAccountId(Integer accountId, Pageable pageable);
 
-    long countByCategoryCategoryId(Long categoryId);
+    long countByCategoryCategoryId(Integer categoryId);
 
-    long countByCreatedByAccountId(Long accountId);
+    long countByCreatedByAccountId(Integer accountId);
 
     @Query("SELECT n FROM NewsArticle n WHERE n.newsStatus = :status AND " +
             "(LOWER(n.newsTitle) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(n.headline) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(n.newsContent) LIKE LOWER(CONCAT('%', :keyword, '%')))")
-    Page<NewsArticle> searchActiveByKeyword(@Param("status") Integer status, @Param("keyword") String keyword, Pageable pageable);
+    Page<NewsArticle> searchActiveByKeyword(@Param("status") Boolean status, @Param("keyword") String keyword, Pageable pageable);
 
     @Query("SELECT n FROM NewsArticle n WHERE n.createdBy.accountId = :accountId AND " +
             "(LOWER(n.newsTitle) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(n.headline) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(n.newsContent) LIKE LOWER(CONCAT('%', :keyword, '%')))")
-    Page<NewsArticle> searchByCreatedByAndKeyword(@Param("accountId") Long accountId, @Param("keyword") String keyword, Pageable pageable);
+    Page<NewsArticle> searchByCreatedByAndKeyword(@Param("accountId") Integer accountId, @Param("keyword") String keyword, Pageable pageable);
 }

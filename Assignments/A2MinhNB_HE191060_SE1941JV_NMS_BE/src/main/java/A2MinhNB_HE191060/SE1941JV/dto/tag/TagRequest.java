@@ -13,8 +13,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TagRequest {
     @NotBlank(message = "Tag name is required")
-    @Size(max = 255)
+    @Size(max = 50)
     private String tagName;
 
+    @Size(max = 400)
     private String note;
 }

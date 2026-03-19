@@ -2,14 +2,16 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Container, Card, Form, Button, InputGroup, Alert } from "react-bootstrap";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
+import { register } from "../services/authService";
 
-const Login = () => {
+const Register = () => {
     const navigate = useNavigate();
 
-    const [form, setForm] = useState({ username: "", password: "" });
+    const [form, setForm] = useState({ name: "", email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,17 +24,14 @@ const Login = () => {
         setLoading(true);
 
         try {
-            setError("");
-            // call backend login
-            const { login } = await import("../services/authService");
-            const res = await login(form.username, form.password);
-            if (res?.data?.token) {
-                navigate("/admin/dashboard");
-            } else {
-                setError("Tên đăng nhập hoặc mật khẩu không đúng");
-            }
+            await register(form.name, form.email, form.password);
+            setSuccess(true);
+            setTimeout(() => {
+                navigate("/login");
+            }, 2000);
         } catch (err) {
-            setError("Tên đăng nhập hoặc mật khẩu không đúng");
+            console.error("Register error:", err);
+            setError(err.response?.data?.message || "Đăng ký thất bại. Vui lòng thử lại.");
         } finally {
             setLoading(false);
         }
@@ -43,46 +42,61 @@ const Login = () => {
             <Container style={{ maxWidth: 420 }}>
                 <Card className="shadow-sm border-0">
                     <Card.Body className="p-4 p-md-5">
-                        {/* Header */}
                         <div className="text-center mb-4">
                             <h4 className="fw-semibold mb-1">FUNews</h4>
                             <div className="text-muted small">
-                                Hệ thống quản lý tin tức
+                                Đăng ký tài khoản mới (Staff)
                             </div>
                         </div>
 
-                        {/* Error */}
                         {error && (
-                            <Alert variant="danger" className="py-2 text-center">
+                            <Alert variant="danger" className="py-2 text-center text-small">
                                 {error}
+                            </Alert>
+                        )}
+
+                        {success && (
+                            <Alert variant="success" className="py-2 text-center text-small">
+                                Đăng ký thành công! Đang chuyển hướng...
                             </Alert>
                         )}
 
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3">
-                                <Form.Label className="fw-medium">
-                                    Tên đăng nhập
-                                </Form.Label>
+                                <Form.Label className="fw-medium small">Họ và tên</Form.Label>
                                 <Form.Control
-                                    name="username"
-                                    placeholder="Nhập tên đăng nhập"
-                                    value={form.username}
+                                    name="name"
+                                    placeholder="Nhập họ và tên"
+                                    value={form.name}
                                     onChange={handleChange}
+                                    required
                                     autoFocus
                                 />
                             </Form.Group>
 
+                            <Form.Group className="mb-3">
+                                <Form.Label className="fw-medium small">Email</Form.Label>
+                                <Form.Control
+                                    name="email"
+                                    type="email"
+                                    placeholder="Nhập email"
+                                    value={form.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+
                             <Form.Group className="mb-4">
-                                <Form.Label className="fw-medium">
-                                    Mật khẩu
-                                </Form.Label>
+                                <Form.Label className="fw-medium small">Mật khẩu</Form.Label>
                                 <InputGroup>
                                     <Form.Control
                                         name="password"
                                         type={showPassword ? "text" : "password"}
-                                        placeholder="Nhập mật khẩu"
+                                        placeholder="Nhập mật khẩu (tối thiểu 6 ký tự)"
                                         value={form.password}
                                         onChange={handleChange}
+                                        required
+                                        minLength={6}
                                     />
                                     <Button
                                         variant="outline-secondary"
@@ -96,18 +110,18 @@ const Login = () => {
 
                             <Button
                                 type="submit"
-                                className="w-100 mb-3"
-                                disabled={loading}
+                                className="w-100 py-2 mb-3"
+                                disabled={loading || success}
                             >
-                                {loading ? "Đang đăng nhập..." : "Đăng nhập"}
+                                {loading ? "Đang xử lý..." : "Đăng ký"}
                             </Button>
 
                             <div className="text-center small">
-                                Chưa có tài khoản? <Link to="/register" className="text-decoration-none">Đăng ký ngay</Link>
+                                Đã có tài khoản? <Link to="/login" className="text-decoration-none">Đăng nhập ngay</Link>
                             </div>
                         </Form>
 
-                        <div className="text-center text-muted small mt-4">
+                        <div className="text-center text-muted x-small mt-4">
                             © {new Date().getFullYear()} FUNews Management System
                         </div>
                     </Card.Body>
@@ -117,4 +131,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

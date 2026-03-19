@@ -2,13 +2,16 @@ spring:
   application:
     name: SE1941JV
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=FUNewsDB;encrypt=true;trustServerCertificate=true;
+    url: jdbc:sqlserver://localhost:1433;databaseName=FUNewsManagementSBA301_v2;encrypt=true;trustServerCertificate=true;
     username: sa
-    password: 21012005
+    password: 123456789
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     show-sql: false
     properties:
       hibernate:

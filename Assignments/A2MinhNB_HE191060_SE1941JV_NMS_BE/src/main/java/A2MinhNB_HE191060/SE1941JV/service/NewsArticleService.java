@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class NewsArticleService {
-    private static final int ACTIVE = 1;
+    private static final Boolean ACTIVE = true;
 
     private final NewsArticleRepository newsArticleRepository;
     private final CategoryRepository categoryRepository;
@@ -43,7 +43,7 @@ public class NewsArticleService {
 
     /** Public: get one article by id (only if active). */
     @Transactional(readOnly = true)
-    public NewsArticleResponse findActiveById(Long id) {
+    public NewsArticleResponse findActiveById(Integer id) {
         NewsArticle n = newsArticleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("News article not found: " + id));
         if (n.getNewsStatus() != ACTIVE) {
@@ -54,21 +54,21 @@ public class NewsArticleService {
 
     /** Staff: list news created by current user (my news). */
     @Transactional(readOnly = true)
-    public PageResponse<NewsArticleResponse> findMyNews(Long accountId, String keyword, Pageable pageable) {
+    public PageResponse<NewsArticleResponse> findMyNews(Integer accountId, String keyword, Pageable pageable) {
         String k = keyword != null && !keyword.isBlank() ? keyword.trim() : "";
         Page<NewsArticle> page = newsArticleRepository.searchByCreatedByAndKeyword(accountId, k, pageable);
         return toPageResponse(page);
     }
 
     @Transactional(readOnly = true)
-    public NewsArticleResponse getById(Long id) {
+    public NewsArticleResponse getById(Integer id) {
         NewsArticle n = newsArticleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("News article not found: " + id));
         return toResponse(n);
     }
 
     @Transactional
-    public NewsArticleResponse create(NewsArticleRequest request, Long createdByAccountId) {
+    public NewsArticleResponse create(NewsArticleRequest request, Integer createdByAccountId) {
         Category category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found: " + request.getCategoryId()));
         SystemAccount createdBy = accountRepository.findById(createdByAccountId)
@@ -92,7 +92,7 @@ public class NewsArticleService {
     }
 
     @Transactional
-    public NewsArticleResponse update(Long id, NewsArticleRequest request) {
+    public NewsArticleResponse update(Integer id, NewsArticleRequest request) {
         NewsArticle article = newsArticleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("News article not found: " + id));
         Category category = categoryRepository.findById(request.getCategoryId())
@@ -112,7 +112,7 @@ public class NewsArticleService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void delete(Integer id) {
         NewsArticle article = newsArticleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("News article not found: " + id));
         newsArticleRepository.delete(article);
@@ -139,7 +139,7 @@ public class NewsArticleService {
         return CategoryResponse.builder()
                 .categoryId(c.getCategoryId())
                 .categoryName(c.getCategoryName())
-                .categoryDescription(c.getCategoryDescription())
+                .categoryDesciption(c.getCategoryDesciption())
                 .parentCategoryId(c.getParentCategory() != null ? c.getParentCategory().getCategoryId() : null)
                 .isActive(c.getIsActive())
                 .build();

@@ -106,9 +106,9 @@ const Category = () => {
                     {filteredCategories.map((c) => (
                         <tr key={c.id}>
                             <td>{c.categoryName}</td>
-                            <td>{c.categoryDescription}</td>
+                            <td>{c.categoryDesciption}</td>
                             <td>
-                                {c.isActive === 1 ? (
+                                {c.isActive ? (
                                     <Badge bg="success">Active</Badge>
                                 ) : (
                                     <Badge bg="secondary">Inactive</Badge>

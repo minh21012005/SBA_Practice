@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
-public interface SystemAccountRepository extends JpaRepository<SystemAccount, Long> {
+public interface SystemAccountRepository extends JpaRepository<SystemAccount, Integer> {
     boolean existsByAccountEmail(String email);
 
     Optional<SystemAccount> findByAccountEmail(String email);

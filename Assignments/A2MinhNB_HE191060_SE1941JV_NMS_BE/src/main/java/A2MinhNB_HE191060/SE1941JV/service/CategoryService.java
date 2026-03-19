@@ -21,7 +21,7 @@ public class CategoryService {
     private final NewsArticleRepository newsArticleRepository;
 
     @Transactional(readOnly = true)
-    public PageResponse<CategoryResponse> search(String keyword, Integer isActive, Pageable pageable) {
+    public PageResponse<CategoryResponse> search(String keyword, Boolean isActive, Pageable pageable) {
         String k = keyword != null && !keyword.isBlank() ? keyword.trim() : null;
         Page<Category> page;
         if (k != null && isActive != null) {
@@ -37,7 +37,7 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public CategoryResponse getById(Long id) {
+    public CategoryResponse getById(Integer id) {
         Category c = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found: " + id));
         return toResponse(c);
@@ -52,7 +52,7 @@ public class CategoryService {
         }
         Category category = Category.builder()
                 .categoryName(request.getCategoryName())
-                .categoryDescription(request.getCategoryDescription())
+                .categoryDesciption(request.getCategoryDesciption())
                 .parentCategory(parent)
                 .isActive(request.getIsActive())
                 .build();
@@ -61,11 +61,11 @@ public class CategoryService {
     }
 
     @Transactional
-    public CategoryResponse update(Long id, CategoryRequest request) {
+    public CategoryResponse update(Integer id, CategoryRequest request) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found: " + id));
         category.setCategoryName(request.getCategoryName());
-        category.setCategoryDescription(request.getCategoryDescription());
+        category.setCategoryDesciption(request.getCategoryDesciption());
         category.setIsActive(request.getIsActive());
         if (request.getParentCategoryId() != null) {
             Category parent = categoryRepository.findById(request.getParentCategoryId())
@@ -79,7 +79,7 @@ public class CategoryService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void delete(Integer id) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found: " + id));
         long count = newsArticleRepository.countByCategoryCategoryId(id);
@@ -93,7 +93,7 @@ public class CategoryService {
         return CategoryResponse.builder()
                 .categoryId(c.getCategoryId())
                 .categoryName(c.getCategoryName())
-                .categoryDescription(c.getCategoryDescription())
+                .categoryDesciption(c.getCategoryDesciption())
                 .parentCategoryId(c.getParentCategory() != null ? c.getParentCategory().getCategoryId() : null)
                 .isActive(c.getIsActive())
                 .build();

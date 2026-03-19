@@ -17,6 +17,17 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final AccountService accountService;
+
+    public AccountResponse register(A2MinhNB_HE191060.SE1941JV.dto.auth.RegisterRequest request) {
+        A2MinhNB_HE191060.SE1941JV.dto.account.AccountRequest accountRequest = A2MinhNB_HE191060.SE1941JV.dto.account.AccountRequest.builder()
+                .accountName(request.getAccountName())
+                .accountEmail(request.getAccountEmail())
+                .accountPassword(request.getAccountPassword())
+                .accountRole(2) // Default to Staff
+                .build();
+        return accountService.create(accountRequest);
+    }
 
     public LoginResponse login(LoginRequest request) {
         Authentication auth = authenticationManager.authenticate(

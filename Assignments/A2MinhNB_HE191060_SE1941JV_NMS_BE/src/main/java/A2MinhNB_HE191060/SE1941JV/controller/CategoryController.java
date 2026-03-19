@@ -22,7 +22,7 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<PageResponse<CategoryResponse>> search(
             @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) Integer isActive,
+            @RequestParam(required = false) Boolean isActive,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "categoryId") String sortBy,
@@ -33,7 +33,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<CategoryResponse> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(categoryService.getById(id));
     }
 
@@ -43,12 +43,12 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryResponse> update(@PathVariable Long id, @Valid @RequestBody CategoryRequest request) {
+    public ResponseEntity<CategoryResponse> update(@PathVariable Integer id, @Valid @RequestBody CategoryRequest request) {
         return ResponseEntity.ok(categoryService.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
     }

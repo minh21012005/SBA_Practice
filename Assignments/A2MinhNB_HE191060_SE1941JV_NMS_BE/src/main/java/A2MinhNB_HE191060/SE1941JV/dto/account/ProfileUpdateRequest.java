@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProfileUpdateRequest {
-    @Size(max = 255)
+    @Size(max = 100)
     private String accountName;
 
     @Email(message = "Invalid email format")
-    @Size(max = 255)
+    @Size(max = 150)
     private String accountEmail;
 
     @Size(min = 6, message = "Password must be at least 6 characters")

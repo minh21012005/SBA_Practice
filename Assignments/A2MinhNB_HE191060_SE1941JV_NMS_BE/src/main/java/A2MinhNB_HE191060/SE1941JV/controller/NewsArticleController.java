@@ -35,7 +35,7 @@ public class NewsArticleController {
     }
 
     @GetMapping("/news/{id}")
-    public ResponseEntity<NewsArticleResponse> getActiveById(@PathVariable Long id) {
+    public ResponseEntity<NewsArticleResponse> getActiveById(@PathVariable Integer id) {
         return ResponseEntity.ok(newsArticleService.findActiveById(id));
     }
 
@@ -56,7 +56,7 @@ public class NewsArticleController {
 
     // ---------- Staff: full CRUD (get one for edit, create, update, delete) ----------
     @GetMapping("/news/{id}/edit")
-    public ResponseEntity<NewsArticleResponse> getByIdForEdit(@PathVariable Long id) {
+    public ResponseEntity<NewsArticleResponse> getByIdForEdit(@PathVariable Integer id) {
         return ResponseEntity.ok(newsArticleService.getById(id));
     }
 
@@ -71,13 +71,13 @@ public class NewsArticleController {
 
     @PutMapping("/news/{id}")
     public ResponseEntity<NewsArticleResponse> update(
-            @PathVariable Long id,
+            @PathVariable Integer id,
             @Valid @RequestBody NewsArticleRequest request) {
         return ResponseEntity.ok(newsArticleService.update(id, request));
     }
 
     @DeleteMapping("/news/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         newsArticleService.delete(id);
         return ResponseEntity.noContent().build();
     }

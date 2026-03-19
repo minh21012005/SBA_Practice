@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "news_articles")
+@Table(name = "NewsArticle")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,51 +19,59 @@ public class NewsArticle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long newsArticleId;
+    @Column(name = "NewsArticleID")
+    Integer newsArticleId;
 
-    @Column(nullable = false)
+    @Column(name = "NewsTitle", length = 400)
     String newsTitle;
 
+    @Column(name = "Headline", length = 400, nullable = false)
     String headline;
 
-    @Column(name = "NewsContent", columnDefinition = "NVARCHAR(4000)")
+    @Column(name = "NewsContent", columnDefinition = "NVARCHAR(MAX)")
     String newsContent;
 
+    @Column(name = "NewsSource", length = 400)
     String newsSource;
 
+    @Column(name = "CreatedDate")
     LocalDateTime createdDate;
 
+    @Column(name = "ModifiedDate")
     LocalDateTime modifiedDate;
 
-    /**
-     * 1 = active
-     * 0 = inactive
-     */
-    @Column(nullable = false)
-    Integer newsStatus;
+    @Column(name = "NewsStatus")
+    Boolean newsStatus;
 
     /**
      * Many news belong to one category
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "CategoryID")
     Category category;
 
     /**
      * Created by staff account
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by_id", nullable = false)
+    @JoinColumn(name = "CreatedByID")
     SystemAccount createdBy;
+
+    /**
+     * Updated by staff account
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UpdatedByID")
+    SystemAccount updatedBy;
 
     /**
      * Many-to-many with Tag
      */
     @ManyToMany
     @JoinTable(
-            name = "news_tags",
-            joinColumns = @JoinColumn(name = "news_article_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
+            name = "NewsTag",
+            joinColumns = @JoinColumn(name = "NewsArticleID"),
+            inverseJoinColumns = @JoinColumn(name = "TagID")
     )
     Set<Tag> tags;
 }

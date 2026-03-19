@@ -1,4 +1,5 @@
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Category from "./pages/Category";
 import News from "./pages/News";
@@ -19,12 +20,19 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/register",
+    element: <Register />,
+  },
+  {
     path: "/admin",
     element: <AdminLayout />,
     children: [
       {
         index: true,
-        element: <Navigate to="dashboard" />,
+        element: (() => {
+          const account = JSON.parse(localStorage.getItem("funews_account") || "{}");
+          return account.accountRole === 1 ? <Navigate to="dashboard" /> : <Navigate to="my-news" />;
+        })(),
       },
       {
         path: "dashboard",

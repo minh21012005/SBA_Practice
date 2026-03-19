@@ -74,7 +74,7 @@ const MyNews = () => {
                                 <td>{n.headline}</td>
                                 <td>{n.category?.categoryName || "N/A"}</td>
                                 <td>
-                                    {n.newsStatus === 1 ? (
+                                    {n.newsStatus ? (
                                         <Badge bg="success">Active</Badge>
                                     ) : (
                                         <Badge bg="secondary">Inactive</Badge>

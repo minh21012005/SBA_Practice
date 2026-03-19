@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 import java.util.List;
 
 @Entity
-@Table(name = "system_accounts")
+@Table(name = "SystemAccount")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,22 +18,19 @@ public class SystemAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long accountId;
+    @Column(name = "AccountID")
+    Integer accountId;
 
-    @Column(nullable = false)
+    @Column(name = "AccountName", length = 100)
     String accountName;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "AccountEmail", length = 70, unique = true)
     String accountEmail;
 
-    /**
-     * 1 = Admin
-     * 2 = Staff
-     */
-    @Column(nullable = false)
+    @Column(name = "AccountRole")
     Integer accountRole;
 
-    @Column(nullable = false)
+    @Column(name = "AccountPassword", length = 70)
     String accountPassword;
 
     /**
